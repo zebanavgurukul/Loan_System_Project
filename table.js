@@ -23,3 +23,18 @@ knex.schema.hasTable('Information').then((exists) => {
     }
     return console.log('table is created!')
 });
+
+knex.schema.hasTable('user').then((exists) => {
+    if (!exists) {
+        return knex.schema.createTable('user', (table) => {
+            table.increments('id')
+            table.string('name')
+            table.string('email')
+            table.string('password')
+        })
+        .catch((err) => {
+            console.log(err,"There is some err while writing the quety")
+        })
+    }
+    return console.log('table is created!')
+});
