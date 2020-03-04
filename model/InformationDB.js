@@ -20,4 +20,14 @@ let putdata = (id,updata) => {
     return knex('Information').update(updata).where('id',id)
 };
 
-module.exports = {postData,putData,postdata,putdata}
+// Features:-
+// 1
+let getdata = () => {
+    return knex('Information').select('*')
+};
+
+let get = () => {
+    return knex('Information').select('*')
+};
+
+module.exports = {postData,putData,postdata,putdata,getdata,get}

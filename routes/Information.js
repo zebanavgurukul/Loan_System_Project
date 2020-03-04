@@ -13,7 +13,7 @@ Information.post('/update', function (req, res) {
         password: hash
     }
     InformationDB.postData(updata)
-    .then((data) => {
+    .then(() => {
         res.send("insert")
     }).catch((err) => {
         res.send(err)
@@ -49,7 +49,7 @@ Information.post('/post_data', function (req, res) {
         admin_status : req.body.admin_status
     }
     InformationDB.postdata(updata)
-    .then((data) => {
+    .then(() => {
         res.send("insert")
     }).catch((err) => {
         res.send(err)
@@ -69,6 +69,27 @@ Information.put('/put/:id',(req,res) => {
     InformationDB.putdata(id,updata)
     .then(() => {
         res.send('update')
+    }).catch((err) => {
+        res.send(err)
+    })
+});
+
+// Features:-
+// 1
+Information.get('/getdata', (req,res) => {
+    InformationDB.getdata()
+    .then((Data) => {
+        res.send(Data)
+    }).catch((err) => {
+        res.send(err)
+    })
+});
+
+Information.get('/get', (req,res) => {
+    list = []
+    InformationDB.get()
+    .then((data) => {
+    
     }).catch((err) => {
         res.send(err)
     })
