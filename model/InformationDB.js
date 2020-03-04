@@ -15,19 +15,16 @@ let postdata = (update) => {
     return knex('Information').insert(update)
 };
 
-// 2.2
+// Features:-
+// 1
 let putdata = (id,updata) => {
     return knex('Information').update(updata).where('id',id)
 };
 
 // Features:-
-// 1
+// 2
 let getdata = () => {
     return knex('Information').select('*')
 };
 
-let get = () => {
-    return knex('Information').select('*')
-};
-
-module.exports = {postData,putData,postdata,putdata,getdata,get}
+module.exports = {postData,putData,postdata,putdata,getdata}

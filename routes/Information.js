@@ -56,7 +56,8 @@ Information.post('/post_data', function (req, res) {
     })
 });
 
-// 2.2
+// Features:-
+// 1
 Information.put('/put/:id',(req,res) => {
     var id = req.params.id
     var updata = {
@@ -75,7 +76,7 @@ Information.put('/put/:id',(req,res) => {
 });
 
 // Features:-
-// 1
+// 2
 Information.get('/getdata', (req,res) => {
     InformationDB.getdata()
     .then((Data) => {
@@ -87,13 +88,13 @@ Information.get('/getdata', (req,res) => {
 
 Information.get('/get', (req,res) => {
     list = []
-    InformationDB.get()
+    InformationDB.getdata()
     .then((Response) => {
     list = []
     for (j = 0; j < Response.length; j++){
         var customer = Response[j]['customer']
         list.push(customer)
-        console.log(list)  
+        // console.log(list)  
     }
     res.send({list});
     }).catch((err) => {
