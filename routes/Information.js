@@ -20,9 +20,22 @@ Information.post('/update', function (req, res) {
     })
 });
 
-// Information.put('/upData/:id',(req,res) => {
-//     var 
-// });
+Information.put('/upData/:id',(req,res) => {
+    var id = req.params.id
+    bcrypt.hash(req.body.password, saltRounds, function (err,   hash) {
+    var update = {
+        name: req.body.name,
+        email: req.body.email,
+        password: hash
+    }
+    InformationDB.putData(id,update)
+    .then(() => {
+        res.send('update')
+    }).catch((err) => {
+        res.send(err)
+    })
+    })
+});
 
 Information.post('/post_data', function (req, res) {
     let updata = {
