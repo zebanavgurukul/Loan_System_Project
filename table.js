@@ -13,9 +13,11 @@ knex.schema.hasTable('Information').then((exists) => {
     if (!exists) {
         return knex.schema.createTable('Information', (table) => {
             table.increments('id')
-            table.string('admin')
-            table.string('agent')
             table.string('customer')
+            table.string('agent')
+            table.string('agent_status')
+            table.string('admin')
+            table.string('admin_status')
         })
         .catch((err) => {
             console.log(err,"There is some err while writing the quety")

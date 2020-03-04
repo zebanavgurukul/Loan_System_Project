@@ -1,6 +1,6 @@
 const express = require("express");
 const bcrypt = require('bcrypt');
-const saltRounds = 10;
+const saltRounds = 14;
 const Information = express.Router();
 const InformationDB   = require("../model/InformationDB")
 
@@ -20,15 +20,38 @@ Information.post('/update', function (req, res) {
     })
 });
 
+// Information.put('/upData/:id',(req,res) => {
+//     var 
+// });
+
 Information.post('/post_data', function (req, res) {
     let updata = {
-        admin: req.body.admin,
-        agent: req.body.agent,
-        customer: req.body.customer
+        customer : req.body.customer,
+        agent : req.body.agent,
+        agent_status : req.body.agent_status,
+        admin : req.body.admin,
+        admin_status : req.body.admin_status
     }
     InformationDB.postdata(updata)
     .then((data) => {
         res.send("insert")
+    }).catch((err) => {
+        res.send(err)
+    })
+});
+
+Information.put('/put/:id',(req,res) => {
+    var id = req.params.id
+    var updata = {
+        customer : req.body.customer,
+        agent : req.body.agent,
+        agent_status : req.body.agent_status,
+        admin : req.body.admin,
+        admin_status : req.body.admin_status
+    }
+    InformationDB.putdata(id,updata)
+    .then(() => {
+        res.send('update')
     }).catch((err) => {
         res.send(err)
     })
