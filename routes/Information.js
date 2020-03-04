@@ -88,8 +88,14 @@ Information.get('/getdata', (req,res) => {
 Information.get('/get', (req,res) => {
     list = []
     InformationDB.get()
-    .then((data) => {
-    
+    .then((Response) => {
+    list = []
+    for (j = 0; j < Response.length; j++){
+        var customer = Response[j]['customer']
+        list.push(customer)
+        console.log(list)  
+    }
+    res.send({list});
     }).catch((err) => {
         res.send(err)
     })
