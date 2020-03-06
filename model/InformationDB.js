@@ -22,9 +22,14 @@ let putdata = (id,updata) => {
 };
 
 // Features:-
-// 2
+// 1
 let getdata = () => {
     return knex('Information').select('*')
 };
 
-module.exports = {postData,putData,postdata,putdata,getdata}
+// 2
+let insertdata = (id) => {
+    return knex('Information').select('*').where('id',id)
+};
+
+module.exports = {postData,putData,postdata,putdata,getdata,insertdata}

@@ -76,7 +76,7 @@ Information.put('/put/:id',(req,res) => {
 });
 
 // Features:-
-// 2
+// 1
 Information.get('/getdata', (req,res) => {
     InformationDB.getdata()
     .then((Data) => {
@@ -94,9 +94,40 @@ Information.get('/get', (req,res) => {
     for (j = 0; j < Response.length; j++){
         var customer = Response[j]['customer']
         list.push(customer)
-        // console.log(list)  
     }
     res.send({list});
+    }).catch((err) => {
+        res.send(err)
+    })
+});
+
+Information.post('/insert/:id',(req,res) => {
+    var id = req.params.id
+    InformationDB.insertdata(id)
+    .then((Response) => {
+    var agent_status = Response[0]['agent_status']
+    var admin_status = Response[0]['admin_status']
+    var customer = Response[0]['customer']
+    if (agent_status == "Yes"){
+        if (admin_status == "Yes"){
+            var data = "admin and agent is Approved"
+            var customer_data = customer
+            console.log(customer_data,data)
+            res.send({customer_data,data})
+        }
+        else if (admin_status == "No"){
+            var data = "admin no Approved"
+            var customerData = customer
+            console.log(customerData,data)
+            res.send({customerData,data})
+        }
+    }
+    else if (agent_status == "No"){
+        var data = "agent Rejected"
+        var customerdata = customer
+        console.log(customerdata,data)
+        res.send({customerdata,data})
+    }
     }).catch((err) => {
         res.send(err)
     })

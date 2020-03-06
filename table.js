@@ -40,3 +40,18 @@ knex.schema.hasTable('user').then((exists) => {
     }
     return console.log('table is created!')
 });
+
+knex.schema.hasTable('APPROVAL_TABLE').then((exists) => {
+    if (!exists) {
+        return knex.schema.createTable('APPROVAL_TABLE', (table) => {
+            table.increments('id')
+            table.string('NEW')
+            table.string('REJECTED')
+            table.string('APPROVED')
+        })
+        .catch((err) => {
+            console.log(err,"There is some err while writing the quety")
+        })
+    }
+    return console.log('table is created!')
+});
