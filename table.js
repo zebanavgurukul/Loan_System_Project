@@ -55,3 +55,20 @@ knex.schema.hasTable('APPROVAL_TABLE').then((exists) => {
     }
     return console.log('table is created!')
 });
+
+knex.schema.hasTable('EMI_Table').then((exists) => {
+    if (!exists) {
+        return knex.schema.createTable('EMI_Table', (table) => {
+            table.increments('id')
+            table.string('Month')
+            table.string('Interest')
+            table.string('Discount')
+            table.string('Total_cost')
+            table.string('Total_Payment') //(Discount + Interest)
+        })
+        .catch((err) => {
+            console.log(err,"There is some err while writing the quety")
+        })
+    }
+    return console.log('table is created!')
+});

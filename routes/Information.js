@@ -142,4 +142,20 @@ Information.post('/insert/:id',(req,res) => {
     })
 });
 
+Information.post('/post',(res,req) => {
+    var insertData = {
+        Month : req.body.Month,
+        Interest : req.body.Interest,
+        Discount : req.body.Discount,
+        Total_cost : req.body.Total_cost,
+        Total_Payment : req.body.Total_Payment
+    }
+    InformationDB.datapost(insertData)
+    .then(() => {
+        res.send("insert")
+    }).catch((err) => {
+        res.send(err)
+    })
+});
+
 module.exports = Information

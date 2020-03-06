@@ -35,4 +35,8 @@ let insertdata = (id,update) => {
     return knex('APPROVAL_TABLE').insert(update).where('id',id)
 };
 
-module.exports = {postData,putData,postdata,putdata,getdata,get_data,insertdata}
+let datapost = (insertData) => {
+    return knex('EMI_Table').insert(insertData)
+};
+
+module.exports = {postData,putData,postdata,putdata,getdata,get_data,insertdata,datapost}
