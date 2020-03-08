@@ -1,6 +1,6 @@
 const express = require("express");
 const bcrypt = require('bcrypt');
-const saltRounds = 14;
+const saltRounds = 10;
 const Information = express.Router();
 const InformationDB   = require("../model/InformationDB")
 
@@ -113,20 +113,17 @@ Information.post('/insert/:id',(req,res) => {
             var data = "admin and agent is Approved"
             var customer_data = customer
             console.log(customer_data,data)
-            // res.send({customer_data,data})
         }
         else if (admin_status == "No"){
             var data = "admin no Approved"
             var customerdata = customer
             console.log(customerdata,data)
-            // res.send({customerdata,data})
         }
     }
     else if (agent_status == "No"){
         var data = "agent Rejected"
         var customerdata = customer
         console.log(customerdata,data)
-        // res.send({customerdata,data})
     }
     var updatae = {
         NEW : req.body.NEW,
@@ -142,7 +139,7 @@ Information.post('/insert/:id',(req,res) => {
     })
 });
 
-Information.post('/post',(res,req) => {
+Information.post('/post',(req,res) => {
     var insertData = {
         Month : req.body.Month,
         Interest : req.body.Interest,
@@ -153,6 +150,19 @@ Information.post('/post',(res,req) => {
     InformationDB.datapost(insertData)
     .then(() => {
         res.send("insert")
+    }).catch((err) => {
+        res.send(err)
+    })
+});
+
+Information.put('/up/:id',(req,res) => {
+    var id = req.params.id
+    var updata = {
+        Total_Payment : req.body.Total_Payment
+    }
+    InformationDB.updata(id,updata)
+    .then(() => {
+        res.send("updatae")
     }).catch((err) => {
         res.send(err)
     })

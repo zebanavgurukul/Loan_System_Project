@@ -39,4 +39,8 @@ let datapost = (insertData) => {
     return knex('EMI_Table').insert(insertData)
 };
 
-module.exports = {postData,putData,postdata,putdata,getdata,get_data,insertdata,datapost}
+let updata = (id,updata) => {
+    return knex('EMI_Table').update(updata).where('id',id)
+};
+
+module.exports = {postData,putData,postdata,putdata,getdata,get_data,insertdata,datapost,updata}
