@@ -1,12 +1,9 @@
 const express = require("express");
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
 const Information = express.Router();
 const InformationDB   = require("../model/InformationDB")
 
 // 1
 Information.post('/update', function (req, res) {
-    bcrypt.hash(req.body.password, saltRounds, function (err,   hash) {
     let updata = {
         name: req.body.name,
         email: req.body.email,
@@ -18,24 +15,21 @@ Information.post('/update', function (req, res) {
     }).catch((err) => {
         res.send(err)
     })
-    })
 });
 
 // 1.2
 Information.put('/upData/:id',(req,res) => {
     var id = req.params.id
-    bcrypt.hash(req.body.password, saltRounds, function (err,   hash) {
     var update = {
         name: req.body.name,
         email: req.body.email,
-        password: hash
+        password: req.body.password
     }
     InformationDB.putData(id,update)
     .then(() => {
         res.send('update')
     }).catch((err) => {
         res.send(err)
-    })
     })
 });
 
