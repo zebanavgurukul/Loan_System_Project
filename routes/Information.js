@@ -1,4 +1,5 @@
 const express = require("express");
+var jwt = require('jsonwebtoken');
 const Information = express.Router();
 const InformationDB   = require("../model/InformationDB")
 
@@ -14,6 +15,29 @@ Information.post('/update', function (req, res) {
         res.send("insert")
     }).catch((err) => {
         res.send(err)
+    })
+});
+
+// 2
+Information.post("/login",(req,res)=>{
+    let email = req.body.email;
+    let password = req.body.password;
+    InformationDB.login(email)
+    .then((data)=>{
+        if(data.length==0){
+            res.send('worng email')
+        }else{InformationDB.else_login(password).then((data)=>{
+            if(data.length==0){
+                res.send('wrong password ')
+            }else{
+                let token = jwt.sign({"costomer":data},"zeba")
+                    res.cookie(token)
+                    res.send('loing successful')
+                }
+            })
+        }
+    }).catch((err)=>{
+        console.log(err);
     })
 });
 

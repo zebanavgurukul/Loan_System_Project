@@ -5,6 +5,15 @@ let postData = (update) => {
     return knex('user').insert(update)
 };
 
+// 2
+let login = (email) => {
+    return knex.select('email').from('user').havingIn('user.email',email)
+};
+
+let else_login = (password)=>{
+    return knex.select('password').from('user').havingIn('user.password',password)
+};
+
 // 1.2
 let putData = (id,updata) => {
     return knex('user').update(updata).where('id',id)
@@ -43,4 +52,4 @@ let updata = (id,updata) => {
     return knex('EMI_Table').update(updata).where('id',id)
 };
 
-module.exports = {postData,putData,postdata,putdata,getdata,get_data,insertdata,datapost,updata}
+module.exports = {postData,login,else_login,putData,postdata,putdata,getdata,get_data,insertdata,datapost,updata}
