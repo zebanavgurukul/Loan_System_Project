@@ -7,7 +7,7 @@ Information.post('/update', function (req, res) {
     let updata = {
         name: req.body.name,
         email: req.body.email,
-        password: hash
+        password: req.body.password
     }
     InformationDB.postData(updata)
     .then(() => {
