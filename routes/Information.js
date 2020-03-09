@@ -119,6 +119,38 @@ Information.get('/get', (req,res) => {
 });
 
 // 2
+Information.put('/get/:id',(req,res) => {
+    var id = req.params.id
+    InformationDB.get(id)
+    .then((Response) => {
+    var agent_status = Response[0]['agent_status']
+    var customer = Response[0]['customer']
+    var agent = Response[0]['agent']
+    var admin = Response[0]['admin']
+    if (agent_status == "No"){
+        var APPROVED_DATA = {
+            customer : customer,
+            agent : agent,
+            agent_status : req.body.agent_status,
+            admin : admin,
+            admin_status : req.body.admin_status
+        }
+        InformationDB.insert(id,APPROVED_DATA)
+        .then(() => {
+            res.send('update')
+        }).catch((err) => {
+            res.send(err)
+        })
+    }
+    else{
+        res.send('agent_status APPROVED hai')
+    }
+    }).catch((err) => {
+        res.send(err)
+    })
+});
+
+// 2.1
 Information.post('/insert/:id',(req,res) => {
     var id = req.params.id
     InformationDB.get_data(id)
@@ -181,20 +213,6 @@ Information.put('/up/:id',(req,res) => {
     InformationDB.updata(id,updata)
     .then(() => {
         res.send("updatae")
-    }).catch((err) => {
-        res.send(err)
-    })
-});
-
-// 3
-Information.put('/putData/:id',(req,res) => {
-    var id = req.params.id
-    InformationDB.put(id)
-    .then((Response) => {
-    var REJECTED = Response[0]['REJECTED']
-    if(REJECTED == "REJECTED"){
-        
-    }
     }).catch((err) => {
         res.send(err)
     })
