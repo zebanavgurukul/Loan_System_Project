@@ -10,7 +10,7 @@ let login = (email) => {
     return knex.select('email').from('user').havingIn('user.email',email)
 };
 
-let else_login = (password)=>{
+let else_login = (password) => {
     return knex.select('password').from('user').havingIn('user.password',password)
 };
 
@@ -52,4 +52,9 @@ let updata = (id,updata) => {
     return knex('EMI_Table').update(updata).where('id',id)
 };
 
-module.exports = {postData,login,else_login,putData,postdata,putdata,getdata,get_data,insertdata,datapost,updata}
+// 3
+let put = (id) => {
+    return knex('APPROVAL_TABLE').select('*').where('id',id)
+};
+
+module.exports = {postData,login,else_login,putData,postdata,putdata,getdata,get_data,insertdata,datapost,updata,put}

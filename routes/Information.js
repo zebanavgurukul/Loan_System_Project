@@ -186,4 +186,18 @@ Information.put('/up/:id',(req,res) => {
     })
 });
 
+// 3
+Information.put('/putData/:id',(req,res) => {
+    var id = req.params.id
+    InformationDB.put(id)
+    .then((Response) => {
+    var REJECTED = Response[0]['REJECTED']
+    if(REJECTED == "REJECTED"){
+        
+    }
+    }).catch((err) => {
+        res.send(err)
+    })
+});
+
 module.exports = Information
