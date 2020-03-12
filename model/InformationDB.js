@@ -72,4 +72,9 @@ let search = (search_value) => {
     return knex('EMI_Table').select('*').where('Name','like',  '%' +search_value+ '%')
 };
 
-module.exports = {postData,login,else_login,putData,postdata,putdata,getdata,get,insert,get_data,insertdata,dataget,datapost,updata,search}
+// 5.1
+let Dataget = () => {
+    return knex('EMI_Table').select('*')
+}
+
+module.exports = {postData,login,else_login,putData,postdata,putdata,getdata,get,insert,get_data,insertdata,dataget,datapost,updata,search,Dataget}

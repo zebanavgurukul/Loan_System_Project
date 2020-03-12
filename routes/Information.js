@@ -239,4 +239,14 @@ Information.get('/datagat/:search_value', (req,res) => {
     })
 });
 
+// 5.1
+Information.get('/Allget',(req,res) => {
+    InformationDB.Dataget()
+    .then((Response) => {
+        res.send(Response)
+    }).catch((err) => {
+        res.send(err)
+    })
+});
+
 module.exports = Information
