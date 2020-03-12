@@ -35,7 +35,7 @@ let getdata = () => {
     return knex('Information').select('*')
 };
 
-// 2
+// 2,3
 let get_data = (id) => {
     return knex('Information').select('*').where('id',id)
 };

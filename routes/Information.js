@@ -119,7 +119,7 @@ Information.get('/get', (req,res) => {
     })
 });
 
-// 2
+// 2,3
 Information.post('/insert/:id',(req,res) => {
     var id = req.params.id
     InformationDB.get_data(id)
