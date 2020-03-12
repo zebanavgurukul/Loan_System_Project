@@ -159,8 +159,13 @@ Information.post('/insert/:id',(req,res) => {
 });
 
 // 2.1
-Information.post('/post',(req,res) => {
+Information.post('/post/:id',(req,res) => {
+    var id = req.params.id
+    InformationDB.dataget(id)
+    .then((Response) => {
+    var Name = Response[0]['APPROVED']
     var insertData = {
+        Name : Name,
         Month : req.body.Month,
         Interest : req.body.Interest,
         Discount : req.body.Discount,
@@ -172,6 +177,7 @@ Information.post('/post',(req,res) => {
         res.send("insert")
     }).catch((err) => {
         res.send(err)
+    })
     })
 });
 
@@ -195,6 +201,7 @@ Information.put('/get/:id',(req,res) => {
     InformationDB.get(id)
     .then((Response) => {
     var agent_status = Response[0]['agent_status']
+    var admin_status = Response[0]['admin_status']
     var customer = Response[0]['customer']
     var agent = Response[0]['agent']
     var admin = Response[0]['admin']
@@ -204,7 +211,7 @@ Information.put('/get/:id',(req,res) => {
             agent : agent,
             agent_status : req.body.agent_status,
             admin : admin,
-            admin_status : req.body.admin_status
+            admin_status : admin_status
         }
         InformationDB.insert(id,APPROVED_DATA)
         .then(() => {

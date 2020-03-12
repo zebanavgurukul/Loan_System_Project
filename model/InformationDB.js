@@ -45,6 +45,10 @@ let insertdata = (id,update) => {
 };
 
 // 2.1
+let dataget = (id) => {
+    return knex('APPROVAL_TABLE').select('*').where('id',id)
+}
+
 let datapost = (insertData) => {
     return knex('EMI_Table').insert(insertData)
 };
@@ -63,4 +67,4 @@ let insert = (id,update) => {
     return knex('Information').insert(update).where('id',id)
 };
 
-module.exports = {postData,login,else_login,putData,postdata,putdata,getdata,get,insert,get_data,insertdata,datapost,updata}
+module.exports = {postData,login,else_login,putData,postdata,putdata,getdata,get,insert,get_data,insertdata,dataget,datapost,updata}

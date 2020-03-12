@@ -60,6 +60,7 @@ knex.schema.hasTable('EMI_Table').then((exists) => {
     if (!exists) {
         return knex.schema.createTable('EMI_Table', (table) => {
             table.increments('id')
+            table.string('Name')
             table.string('Month')
             table.string('Interest')
             table.string('Discount')
