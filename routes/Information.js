@@ -228,4 +228,15 @@ Information.put('/get/:id',(req,res) => {
     })
 });
 
+// 5
+Information.get('/datagat/:search_value', (req,res) => {
+    var search_value = req.params.search_value
+    InformationDB.search(search_value)
+    .then((Response)=>{
+        res.send(Response)
+    }).catch((err)=>{
+        res.send(err)
+    })
+});
+
 module.exports = Information

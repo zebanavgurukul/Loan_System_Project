@@ -67,4 +67,9 @@ let insert = (id,update) => {
     return knex('Information').insert(update).where('id',id)
 };
 
-module.exports = {postData,login,else_login,putData,postdata,putdata,getdata,get,insert,get_data,insertdata,dataget,datapost,updata}
+// 5
+let search = (search_value) => {
+    return knex('EMI_Table').select('*').where('Name','like',  '%' +search_value+ '%')
+};
+
+module.exports = {postData,login,else_login,putData,postdata,putdata,getdata,get,insert,get_data,insertdata,dataget,datapost,updata,search}
