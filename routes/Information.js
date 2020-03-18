@@ -2,6 +2,27 @@ const express = require("express");
 var jwt = require('jsonwebtoken');
 const Information = express.Router();
 const InformationDB   = require("../model/InformationDB")
+var bcrypt = require('bcrypt');
+const saltRounds = 10;
+
+// creating/salting/hashing
+Information.post('/post',(req,res) => {
+    bcrypt.hash(req.body.password, saltRounds, function (err,   hash) {
+    let updata = {
+        name : req.body.name,
+        email : req.body.email,
+        password : hash
+    }
+    InformationDB.postsiup(updata)
+    .then(() => {
+        res.send('insert')
+    }).catch((err) => {
+        res.send(err)
+    })
+    })
+});
+
+
 
 // 1
 Information.post('/update', function (req, res) {
@@ -248,5 +269,7 @@ Information.get('/Allget',(req,res) => {
         res.send(err)
     })
 });
+
+
 
 module.exports = Information

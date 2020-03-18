@@ -1,5 +1,10 @@
 const knex = require("../knex");
 
+// creating/salting/hashing
+let postsiup = (updata) => {
+    return knex('login').insert(updata)
+};
+
 // 1
 let postData = (update) => {
     return knex('user').insert(update)
@@ -77,4 +82,4 @@ let Dataget = () => {
     return knex('EMI_Table').select('*')
 }
 
-module.exports = {postData,login,else_login,putData,postdata,putdata,getdata,get,insert,get_data,insertdata,dataget,datapost,updata,search,Dataget}
+module.exports = {postsiup,postData,login,else_login,putData,postdata,putdata,getdata,get,insert,get_data,insertdata,dataget,datapost,updata,search,Dataget}
