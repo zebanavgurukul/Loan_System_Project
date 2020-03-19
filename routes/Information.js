@@ -22,7 +22,50 @@ Information.post('/post',(req,res) => {
     })
 });
 
+// login 
+Information.post('/postdata',(req,res) => {
+    let email = req.body.email;
+    let password = req.body.password;
+    InformationDB.datalogin(email)
+    .then((data) => {
+        if(data.length == 0){
+            res.send('worng email')
+        }else{InformationDB.logindata(password).then((data) => {
+            if(data.length == 0){
+                res.send('wrong password ')
+            }else{
+                datapassword = "Parween@123"
+                bcrypt.hash(datapassword,10,(err,hash) => {
+                    bcrypt.compare(datapassword,hash,(err,res) => {
+                        if (res) {
+                            console.log('password match')
+                        }
+                        else {
+                            console.log('password dont match')
+                        }
+                    })
+                });
+                }
+            })
+        }
+    }).catch((err)=>{
+        console.log(err);
+    })
+});
 
+Information.post('/updata', function (req, res) {
+    let updata = {
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password
+    }
+    InformationDB.login_table(updata)
+    .then(() => {
+        res.send("insert")
+    }).catch((err) => {
+        res.send(err)
+    })
+});
 
 // 1
 Information.post('/update', function (req, res) {

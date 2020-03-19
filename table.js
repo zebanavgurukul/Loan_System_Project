@@ -88,3 +88,18 @@ knex.schema.hasTable('login').then((exists) => {
     }
     return console.log('table is created!')
 });
+
+knex.schema.hasTable('login_table').then((exists) => {
+    if (!exists) {
+        return knex.schema.createTable('login_table', (table) => {
+            table.increments('id')
+            table.string('name')
+            table.string('email').unique();
+            table.string('password')
+        })
+        .catch((err) => {
+            console.log(err,"There is some err while writing the quety")
+        })
+    }
+    return console.log('table is created!')
+});

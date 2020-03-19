@@ -5,6 +5,19 @@ let postsiup = (updata) => {
     return knex('login').insert(updata)
 };
 
+// login 
+let datalogin = (email) => {
+    return knex.select('email').from('login').havingIn('login.email',email)
+};
+
+let logindata = (password) => {
+    return knex.select('password').from('login').havingIn('login.password',password)
+};
+// 
+let login_table = (updata) => {
+    return knex('login_table').insert(updata)
+}
+
 // 1
 let postData = (update) => {
     return knex('user').insert(update)
@@ -82,4 +95,4 @@ let Dataget = () => {
     return knex('EMI_Table').select('*')
 }
 
-module.exports = {postsiup,postData,login,else_login,putData,postdata,putdata,getdata,get,insert,get_data,insertdata,dataget,datapost,updata,search,Dataget}
+module.exports = {postsiup,datalogin,logindata,login_table,postData,login,else_login,putData,postdata,putdata,getdata,get,insert,get_data,insertdata,dataget,datapost,updata,search,Dataget}
