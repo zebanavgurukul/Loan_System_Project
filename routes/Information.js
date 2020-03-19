@@ -34,13 +34,15 @@ Information.post('/postdata',(req,res) => {
             if(data.length == 0){
                 res.send('wrong password ')
             }else{
-                bcrypt.hash(password,10,(err,hash) => {
-                    bcrypt.compare(password,hash,(err,res) => {
-                        if (res) {
+                bcrypt.hash(password,saltRounds,(err,hash) => {
+                    bcrypt.compare(password,hash,(err,Response) => {
+                        if (Response) {
                             console.log('password match')
+                            res.send('password match')
                         }
                         else {
                             console.log('password dont match')
+                            res.send('password dont match')
                         }
                     })
                 });
