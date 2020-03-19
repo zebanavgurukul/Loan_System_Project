@@ -7,11 +7,11 @@ let postsiup = (updata) => {
 
 // login 
 let datalogin = (email) => {
-    return knex.select('email').from('login').havingIn('login.email',email)
+    return knex.select('email').from('login_table').havingIn('login_table.email',email)
 };
 
 let logindata = (password) => {
-    return knex.select('password').from('login').havingIn('login.password',password)
+    return knex.select('password').from('login_table').havingIn('login_table.password',password)
 };
 // 
 let login_table = (updata) => {

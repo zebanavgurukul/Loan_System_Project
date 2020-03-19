@@ -34,9 +34,8 @@ Information.post('/postdata',(req,res) => {
             if(data.length == 0){
                 res.send('wrong password ')
             }else{
-                datapassword = "Parween@123"
-                bcrypt.hash(datapassword,10,(err,hash) => {
-                    bcrypt.compare(datapassword,hash,(err,res) => {
+                bcrypt.hash(password,10,(err,hash) => {
+                    bcrypt.compare(password,hash,(err,res) => {
                         if (res) {
                             console.log('password match')
                         }
@@ -45,7 +44,7 @@ Information.post('/postdata',(req,res) => {
                         }
                     })
                 });
-                }
+            }
             })
         }
     }).catch((err)=>{
