@@ -1,5 +1,9 @@
 const knex = require("../knex");
 
+let login_table = (updata) => {
+    return knex('login_table').insert(updata)
+}
+
 // creating/salting/hashing
 let postsiup = (updata) => {
     return knex('login').insert(updata)
@@ -13,10 +17,6 @@ let datalogin = (email) => {
 let logindata = (password) => {
     return knex.select('password').from('login_table').havingIn('login_table.password',password)
 };
-// 
-let login_table = (updata) => {
-    return knex('login_table').insert(updata)
-}
 
 // 1
 let postData = (update) => {

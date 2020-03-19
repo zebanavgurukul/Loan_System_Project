@@ -5,6 +5,20 @@ const InformationDB   = require("../model/InformationDB")
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
 
+Information.post('/updata', function (req, res) {
+    let updata = {
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password
+    }
+    InformationDB.login_table(updata)
+    .then(() => {
+        res.send("insert")
+    }).catch((err) => {
+        res.send(err)
+    })
+});
+
 // creating/salting/hashing
 Information.post('/post',(req,res) => {
     bcrypt.hash(req.body.password, saltRounds, function (err,   hash) {
@@ -51,20 +65,6 @@ Information.post('/postdata',(req,res) => {
         }
     }).catch((err)=>{
         console.log(err);
-    })
-});
-
-Information.post('/updata', function (req, res) {
-    let updata = {
-        name: req.body.name,
-        email: req.body.email,
-        password: req.body.password
-    }
-    InformationDB.login_table(updata)
-    .then(() => {
-        res.send("insert")
-    }).catch((err) => {
-        res.send(err)
     })
 });
 
