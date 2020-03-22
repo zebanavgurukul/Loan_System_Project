@@ -11,11 +11,11 @@ let postsiup = (updata) => {
 
 // login 
 let datalogin = (email) => {
-    return knex.select('email').from('login_table').havingIn('login_table.email',email)
+    return knex.select('*').from('login_table').havingIn('login_table.email',email)
 };
 
 let logindata = (password) => {
-    return knex.select('password').from('login_table').havingIn('login_table.password',password)
+    return knex.select('*').from('login_table').havingIn('login_table.password',password)
 };
 
 // 1
@@ -30,11 +30,11 @@ let putData = (id,updata) => {
 
 // 1.3
 let login = (email) => {
-    return knex.select('email').from('user').havingIn('user.email',email)
+    return knex.select('*').from('user').havingIn('user.email',email)
 };
 
 let else_login = (password) => {
-    return knex.select('password').from('user').havingIn('user.password',password)
+    return knex.select('*').from('user').havingIn('user.password',password)
 };
 
 // Features:-
