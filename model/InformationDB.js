@@ -4,7 +4,7 @@ let login_table = (updata) => {
     return knex('login_table').insert(updata)
 }
 
-// creating/salting/hashing
+// chashing
 let postsiup = (updata) => {
     return knex('login').insert(updata)
 };
@@ -18,23 +18,18 @@ let logindata = (password) => {
     return knex.select('*').from('login_table').havingIn('login_table.password',password)
 };
 
-// 1
-let postData = (update) => {
-    return knex('user').insert(update)
-};
-
 // 1.2
 let putData = (id,updata) => {
-    return knex('user').update(updata).where('id',id)
+    return knex('login_table').update(updata).where('id',id)
 };
 
 // 1.3
 let login = (email) => {
-    return knex.select('*').from('user').havingIn('user.email',email)
+    return knex.select('*').from('login_table').havingIn('login_table.email',email)
 };
 
 let else_login = (password) => {
-    return knex.select('*').from('user').havingIn('user.password',password)
+    return knex.select('*').from('login_table').havingIn('login_table.password',password)
 };
 
 // Features:-
@@ -95,4 +90,4 @@ let Dataget = () => {
     return knex('EMI_Table').select('*')
 }
 
-module.exports = {postsiup,datalogin,logindata,login_table,postData,login,else_login,putData,postdata,putdata,getdata,get,insert,get_data,insertdata,dataget,datapost,updata,search,Dataget}
+module.exports = {postsiup,datalogin,logindata,login_table,login,else_login,putData,postdata,putdata,getdata,get,insert,get_data,insertdata,dataget,datapost,updata,search,Dataget}

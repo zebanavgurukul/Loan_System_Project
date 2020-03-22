@@ -19,7 +19,7 @@ Information.post('/updata', function (req, res) {
     })
 });
 
-// creating/salting/hashing
+// hashing
 Information.post('/post',(req,res) => {
     bcrypt.hash(req.body.password, saltRounds, function (err,   hash) {
     let updata = {
@@ -65,21 +65,6 @@ Information.post('/postdata',(req,res) => {
         }
     }).catch((err)=>{
         console.log(err);
-    })
-});
-
-// 1
-Information.post('/update', function (req, res) {
-    let updata = {
-        name: req.body.name,
-        email: req.body.email,
-        password: req.body.password
-    }
-    InformationDB.postData(updata)
-    .then(() => {
-        res.send("insert")
-    }).catch((err) => {
-        res.send(err)
     })
 });
 
