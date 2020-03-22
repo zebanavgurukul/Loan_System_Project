@@ -68,7 +68,7 @@ Information.post('/postdata',(req,res) => {
     })
 });
 
-// 1.2
+// 1
 Information.put('/upData/:id',(req,res) => {
     var id = req.params.id
     var update = {
@@ -84,7 +84,7 @@ Information.put('/upData/:id',(req,res) => {
     })
 });
 
-// 1.3
+// 1.2
 Information.post("/login",(req,res)=>{
     let email = req.body.email;
     let password = req.body.password;

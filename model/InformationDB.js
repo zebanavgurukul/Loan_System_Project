@@ -18,12 +18,12 @@ let logindata = (password) => {
     return knex.select('*').from('login_table').havingIn('login_table.password',password)
 };
 
-// 1.2
+// 1
 let putData = (id,updata) => {
     return knex('login_table').update(updata).where('id',id)
 };
 
-// 1.3
+// 1.2
 let login = (email) => {
     return knex.select('*').from('login_table').havingIn('login_table.email',email)
 };
