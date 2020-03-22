@@ -115,36 +115,46 @@ Information.post("/login",(req,res)=>{
 // Features:-
 // 1
 Information.post('/post_data', function (req, res) {
-    let updata = {
-        customer : req.body.customer,
-        agent : req.body.agent,
-        agent_status : req.body.agent_status,
-        admin : req.body.admin,
-        admin_status : req.body.admin_status
-    }
-    InformationDB.postdata(updata)
-    .then(() => {
-        res.send("insert")
-    }).catch((err) => {
-        res.send(err)
+    let alltoken = req.headers.cookie
+    var token = alltoken.split('=')
+    token = (token[token.length-2]).slice(11,300)
+    jwt.verify(token,"zeba",(err,result)=>{
+        let updata = {
+            customer : req.body.customer,
+            agent : req.body.agent,
+            agent_status : req.body.agent_status,
+            admin : req.body.admin,
+            admin_status : req.body.admin_status
+        }
+        InformationDB.postdata(updata)
+        .then(() => {
+            res.send("insert")
+        }).catch((err) => {
+            res.send(err)
+        })
     })
 });
 
 // 1.2
 Information.put('/put/:id',(req,res) => {
     var id = req.params.id
-    var updata = {
-        customer : req.body.customer,
-        agent : req.body.agent,
-        agent_status : req.body.agent_status,
-        admin : req.body.admin,
-        admin_status : req.body.admin_status
-    }
-    InformationDB.putdata(id,updata)
-    .then(() => {
-        res.send('update')
-    }).catch((err) => {
-        res.send(err)
+    let alltoken = req.headers.cookie
+    var token = alltoken.split('=')
+    token = (token[token.length-2]).slice(11,300)
+    jwt.verify(token,"zeba",(err,result)=>{
+        var updata = {
+            customer : req.body.customer,
+            agent : req.body.agent,
+            agent_status : req.body.agent_status,
+            admin : req.body.admin,
+            admin_status : req.body.admin_status
+        }
+        InformationDB.putdata(id,updata)
+        .then(() => {
+            res.send('update')
+        }).catch((err) => {
+            res.send(err)
+        })
     })
 });
 
