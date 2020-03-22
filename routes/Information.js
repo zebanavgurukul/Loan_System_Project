@@ -160,27 +160,37 @@ Information.put('/put/:id',(req,res) => {
 
 // 1.3
 Information.get('/getdata', (req,res) => {
-    InformationDB.getdata()
-    .then((Data) => {
-        res.send(Data)
-    }).catch((err) => {
-        res.send(err)
-    })
+    let alltoken = req.headers.cookie
+    var token = alltoken.split('=')
+    token = (token[token.length-2]).slice(11,300)
+    jwt.verify(token,"zeba",(err,result)=>{
+        InformationDB.getdata()
+        .then((Data) => {
+            res.send(Data)
+        }).catch((err) => {
+            res.send(err)
+        })
+    })    
 });
 
 // 1.4
 Information.get('/get', (req,res) => {
-    list = []
-    InformationDB.getdata()
-    .then((Response) => {
-    list = []
-    for (j = 0; j < Response.length; j++){
-        var customer = Response[j]['customer']
-        list.push(customer)
-    }
-    res.send({list});
-    }).catch((err) => {
-        res.send(err)
+    let alltoken = req.headers.cookie
+    var token = alltoken.split('=')
+    token = (token[token.length-2]).slice(11,300)
+    jwt.verify(token,"zeba",(err,result)=>{
+        list = []
+        InformationDB.getdata()
+        .then((Response) => {
+        list = []
+        for (j = 0; j < Response.length; j++){
+            var customer = Response[j]['customer']
+            list.push(customer)
+        }
+        res.send({list});
+        }).catch((err) => {
+            res.send(err)
+        })
     })
 });
 
@@ -226,37 +236,47 @@ Information.post('/insert/:id',(req,res) => {
 // 2.1
 Information.post('/post/:id',(req,res) => {
     var id = req.params.id
-    InformationDB.dataget(id)
-    .then((Response) => {
-    var Name = Response[0]['APPROVED']
-    var insertData = {
-        Name : Name,
-        Month : req.body.Month,
-        Interest : req.body.Interest,
-        Discount : req.body.Discount,
-        Total_cost : req.body.Total_cost,
-        Total_Payment : req.body.Total_Payment
-    }
-    InformationDB.datapost(insertData)
-    .then(() => {
-        res.send("insert")
-    }).catch((err) => {
-        res.send(err)
-    })
+    let alltoken = req.headers.cookie
+    var token = alltoken.split('=')
+    token = (token[token.length-2]).slice(11,300)
+    jwt.verify(token,"zeba",(err,result)=>{
+        InformationDB.dataget(id)
+        .then((Response) => {
+        var Name = Response[0]['APPROVED']
+        var insertData = {
+            Name : Name,
+            Month : req.body.Month,
+            Interest : req.body.Interest,
+            Discount : req.body.Discount,
+            Total_cost : req.body.Total_cost,
+            Total_Payment : req.body.Total_Payment
+        }
+        InformationDB.datapost(insertData)
+        .then(() => {
+            res.send("insert")
+        }).catch((err) => {
+            res.send(err)
+        })
+        })
     })
 });
 
 // 2.2
 Information.put('/up/:id',(req,res) => {
     var id = req.params.id
-    var updata = {
-        Total_Payment : req.body.Total_Payment
-    }
-    InformationDB.updata(id,updata)
-    .then(() => {
-        res.send("updatae")
-    }).catch((err) => {
-        res.send(err)
+    let alltoken = req.headers.cookie
+    var token = alltoken.split('=')
+    token = (token[token.length-2]).slice(11,300)
+    jwt.verify(token,"zeba",(err,result)=>{
+        var updata = {
+            Total_Payment : req.body.Total_Payment
+        }
+        InformationDB.updata(id,updata)
+        .then(() => {
+            res.send("updatae")
+        }).catch((err) => {
+            res.send(err)
+        })
     })
 });
 
@@ -296,24 +316,32 @@ Information.put('/get/:id',(req,res) => {
 // 5
 Information.get('/datagat/:search_value', (req,res) => {
     var search_value = req.params.search_value
-    InformationDB.search(search_value)
-    .then((Response)=>{
-        res.send(Response)
-    }).catch((err)=>{
-        res.send(err)
+    let alltoken = req.headers.cookie
+    var token = alltoken.split('=')
+    token = (token[token.length-2]).slice(11,300)
+    jwt.verify(token,"zeba",(err,result)=>{
+        InformationDB.search(search_value)
+        .then((Response)=>{
+            res.send(Response)
+        }).catch((err)=>{
+            res.send(err)
+        })
     })
 });
 
 // 5.1
 Information.get('/Allget',(req,res) => {
-    InformationDB.Dataget()
-    .then((Response) => {
-        res.send(Response)
-    }).catch((err) => {
-        res.send(err)
+    let alltoken = req.headers.cookie
+    var token = alltoken.split('=')
+    token = (token[token.length-2]).slice(11,300)
+    jwt.verify(token,"zeba",(err,result)=>{
+        InformationDB.Dataget()
+        .then((Response) => {
+            res.send(Response)
+        }).catch((err) => {
+            res.send(err)
+        })
     })
 });
-
-
 
 module.exports = Information
