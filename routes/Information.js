@@ -71,16 +71,21 @@ Information.post('/postdata',(req,res) => {
 // 1
 Information.put('/upData/:id',(req,res) => {
     var id = req.params.id
-    var update = {
-        name: req.body.name,
-        email: req.body.email,
-        password: req.body.password
-    }
-    InformationDB.putData(id,update)
-    .then(() => {
-        res.send('update')
-    }).catch((err) => {
-        res.send(err)
+    let alltoken = req.headers.cookie
+    var token = alltoken.split('=')
+    token = (token[token.length-2]).slice(11,300)
+    jwt.verify(token,"zeba",(err,result)=>{
+        var update = {
+            name: req.body.name,
+            email: req.body.email,
+            password: req.body.password
+        }
+        InformationDB.putData(id,update)
+        .then(() => {
+            res.send('update')
+        }).catch((err) => {
+            res.send(err)
+        })
     })
 });
 
