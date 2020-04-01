@@ -3,7 +3,7 @@ var jwt = require('jsonwebtoken');
 const Information = express.Router();
 const InformationDB   = require("../model/InformationDB")
 var bcrypt = require('bcrypt');
-const saltRounds = 10;
+
 
 Information.post('/updata', function (req, res) {
     let updata = {
@@ -21,7 +21,7 @@ Information.post('/updata', function (req, res) {
 
 // hashing
 Information.post('/post',(req,res) => {
-    bcrypt.hash(req.body.password, saltRounds, function (err,   hash) {
+    bcrypt.hash(req.body.password, 10, function (err,   hash) {
     let updata = {
         name : req.body.name,
         email : req.body.email,
@@ -48,7 +48,7 @@ Information.post('/postdata',(req,res) => {
             if(data.length == 0){
                 res.send('wrong password ')
             }else{
-                bcrypt.hash(password,saltRounds,(err,hash) => {
+                bcrypt.hash(password,10,(err,hash) => {
                     bcrypt.compare(password,hash,(err,Response) => {
                         if (Response) {
                             console.log('password match')
