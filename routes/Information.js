@@ -1,6 +1,6 @@
 const express = require("express");
 var jwt = require('jsonwebtoken');
-const Information = express.Router();
+const Information = express();
 const InformationDB   = require("../model/InformationDB")
 var bcrypt = require('bcrypt');
 
